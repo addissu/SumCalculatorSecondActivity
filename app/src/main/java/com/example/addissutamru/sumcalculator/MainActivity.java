@@ -19,6 +19,8 @@ public class MainActivity extends Activity {
 
     private SharedPreferences savedValues;
 
+    //what we want to save
+
     private int num1 = 0;
     private int num2 = 0;
 
@@ -37,6 +39,38 @@ public class MainActivity extends Activity {
 
 
     }
+
+    @Override
+    public void onPause() {
+
+        SharedPreferences.Editor editor = savedValues.edit();
+        editor.putInt("num1", num1);
+        editor.putInt("num2", num2);
+        editor.commit();
+        // save the instance variables above
+        super.onPause();
+    }
+    public void onResume(){
+
+        super.onResume();
+        //get instance variables
+        num1 = savedValues.getInt("num1", 0);
+        num2 = savedValues.getInt("num2", 0);
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
     /*public void calculateAndDisplay(){
          num1 = Integer.parseInt(editTextNum1.getText().toString());
         num2 = Integer.parseInt(editTextNum2.getText().toString());
